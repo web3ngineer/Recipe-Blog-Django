@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'icons/bootstrap-icons.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <title>Navbar</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top shadow-lg">
+        <div class="container">
+          <a class="navbar-brand" href="/">Receipe Blog</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            {% comment %} <span class="navbar-toggler-icon"></span> {% endcomment %}
+            <i class="bi bi-list"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              {% if request.user.is_authenticated %}
+                <li class="nav-item ">
+                    <a class="nav-link active" href="/receipe/user/{{request.user}}">Your Receipes</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="/receipe/add-receipe">Add Receipe</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link active" href="/">All Receipes</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/home/contact">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/home/about">About</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav gap-2">
+              {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                  <P class="nav-link active" href="#">
+                    <i class="bi bi-person-circle pe-2"></i>
+                    {{request.user}}
+                  </P>
+                </li>
+                <li class="nav-item">
+                  <a class="btn btn-primary" href="/auth/signout">Logout</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link active" href="/auth/signin">Sign-in</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-primary" href="/auth/signup">Register</a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+</body>
+</html>

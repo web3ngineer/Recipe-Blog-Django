@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth</title>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 50%;
+          margin-top:1rem;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        th:first-child{
+            width:50px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style='color:yellow'>Auth Page</h1>
+    {{peoples}}
+    <table>
+        <tr>
+          <th>Sr No.</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Can Vote</th>
+        </tr>
+        {% for people in peoples %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{people.name}}</td>
+            <td>{{people.age}}</td>
+            <td {% if people.age < 18 %} style='background-color:red'{% endif %} >
+                {% if people.age >= 18  %}
+                    👍
+                {% else %}
+                    👎
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+      </table>
+</body>
+</html>

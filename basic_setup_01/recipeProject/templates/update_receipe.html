@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Update Receipe Page
+{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5" >
+        <div class="d-flex justify-content-center mb-5">
+            <h1>Update Receipe Page</h1>
+        </div>
+        <div class="col-6 mx-auto mb-2">
+            <a class="btn p-0" href="/receipe/user/{{request.user}}"><i class="bi bi-arrow-left me-2"></i>Receipe Page</a>
+        </div>
+        <form class="col-6 mb-4 mx-auto card p-3 shadow-lg" method='POST' enctype='multipart/form-data'>
+            {% csrf_token %}
+            <h2>Receipe Form</h2>
+            <div class="mb-3">
+              <label for="receipe_name" class="form-label">Receipe Name</label>
+              <input name='receipe_name' type="text" class="form-control" id="receipe_name" value="{{receipe.receipe_name}}" required>
+            </div>
+            <div class="mb-3">
+              <label for="receipe_desc" class="form-label">Receipe Description</label>
+              <textarea name='receipe_desc' type="password" class="form-control" id="receipe_desc" required>{{receipe.receipe_desc}}</textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="receipe_image">Receipe Image</label>
+                <input name='receipe_image' type="file" class="form-control" id="receipe_image">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Receipe</button>
+        </form>
+    </div>
+{% endblock content %}

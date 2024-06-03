@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Receipe Page
+{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5" >
+        <div class="d-flex justify-content-center mt-4">
+            <h1>Your Receipe</h1>
+        </div>
+        {% comment %} {{request.user}} {% endcomment %}
+        <form class="mt-4">
+            <label for="search_receipe" class="form-label ps-2">Search Receipe:</label>
+            <div class="d-flex">
+                <input name='search' type="text" class="form-control rounded-4 rounded-end-0" id="search_receipe" placeholder="Search...">
+                <button type='submit' class='btn btn-dark rounded-4 rounded-start-0'>Search</button>
+            </div>
+            {% if search %}
+            <div class='d-flex justify-content-end pt-2'>
+                <a href="/receipe/">clear search</a>
+            </div>
+            {% endif %}
+        </form>
+        {% if request.user.is_authenticated %}
+        <a href='/receipe/add-receipe' class="btn btn-primary {% if search %}mt-0{% else %}mt-3{% endif %}">Add Receipe</a>
+        {% endif %}
+        <table class="table table-bordered mt-4">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Receipe Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+                {% if request.user.is_authenticated %}
+                <th scope="col">Actions</th>
+                {% endif %}
+              </tr>
+            </thead>
+            <tbody>
+            {% for receipe in receipes  %}
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{receipe.receipe_name}}</td>
+                <td>
+                    <p>{{receipe.receipe_desc}}</p>
+                </td>
+                <td>
+                    <img src="/receipe/media/{{receipe.receipe_image}}" width="100px" height="100px">
+                </td>
+                {% if request.user.is_authenticated %}
+                <td>
+                    <div class='d-flex flex-column gap-2'>
+                        <a class='btn px-2 py-0' href='/receipe/delete-receipe/{{receipe.id}}'><i class="bi bi-trash fs-3 text-danger"></i></a>
+                        <a class='btn px-2 py-0' href='/receipe/update-receipe/{{receipe.id}}'><i class="bi bi-pencil-square fs-4 text-primary"></i></a>
+                    </div>
+                </td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+    </div>
+{% endblock content %}

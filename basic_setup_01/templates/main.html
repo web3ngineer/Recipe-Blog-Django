@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home Page
+{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5" >
+        <div class="d-flex justify-content-center mt-4">
+            <h1>Main Page</h1>
+        </div>
+        <form class="mt-4">
+            <label for="search_receipe" class="form-label ps-2">Search Receipe:</label>
+            <div class="d-flex">
+                <input name='search' type="text" class="form-control rounded-4 rounded-end-0" id="search_receipe" placeholder="Search...">
+                <button type='submit' class='btn btn-dark rounded-4 rounded-start-0'>Search</button>
+            </div>
+            {% if search %}
+            <div class='d-flex justify-content-end pt-2'>
+                <a href="/">clear search</a>
+            </div>
+            {% endif %}
+        </form>
+        <table class="table table-bordered mt-4">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Receipe Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for receipe in receipes  %}
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{receipe.receipe_name}}</td>
+                <td>
+                    <p>{{receipe.receipe_desc}}</p>
+                </td>
+                <td>
+                    <img src="/receipe/media/{{receipe.receipe_image}}" width="100px" height="100px">
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+    </div>
+{% endblock content %}
