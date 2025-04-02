@@ -42,7 +42,7 @@ def addReceipe(request):
 
 @login_required(login_url='/auth/signin')
 def deleteReceipe(request,id):
-    print(id)
+    # print(id)
     Receipe.objects.filter(id=id).delete()
     return redirect(f'/receipe/user/{request.user}')
 
