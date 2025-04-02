@@ -16,10 +16,6 @@
       "dest": "/staticfiles/$1"
     },
     {
-      "src": "/media/(.*)",
-      "dest": "public/staticmedia/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "basic_setup_01/wsgi.py"
     }

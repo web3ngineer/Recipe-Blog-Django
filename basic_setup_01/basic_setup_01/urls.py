@@ -40,3 +40,4 @@ urlpatterns = [
     path('auth/', include('authentication.urls')),
     path('receipe/', include('recipeProject.urls')),
 ]
+
